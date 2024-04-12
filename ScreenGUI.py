@@ -280,7 +280,7 @@ def connectSerial():
 reply_timeout = 10
 ping_timeout = 5
 sleep_time = 5
-url = 'ws://192.168.1.91:80'
+url = 'ws://192.168.0.31:80'
 
 def on_open(ws):
     print('open ws success')
