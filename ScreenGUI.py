@@ -8,6 +8,7 @@ from paho.mqtt import client as pahoMqtt
 import serial.tools.list_ports
 import asyncio
 import websocket
+import logging
 
 
 def updatePosText(text):
@@ -47,35 +48,28 @@ def plotPos():
             print('not a float')
     elif guiState == 'target':
         showOffsetText(False)
-        # canvas.itemconfig(posText, text=userInput+' m')
         updatePosText(userInput)
-        # posLabel.config(text=userInput)
-        # guiStateLabel.config(text='target')
-        # guiStateLabel.pack()
     elif guiState == 'offset':
         showOffsetText(True)
         if not userInput == 'None':
             updatePosText(userInput)
-        # guiStateLabel.config(text='offset')
-        # guiStateLabel.pack()
-    if (not prod == displayProd) or (not proy == displayProy):
-        # productoraLabel.config(text=prod)
-        displayProd = prod
-        # proyectoLabel.config(text=proy)
-        displayProy = proy
-        
-
-    
-    # stateLabel.config(text=grblState)
     root.after(50, plotPos)
+
+def askSerial():
+    if comPort:
+        try:
+            comPort.write('?'.encode())
+        except:
+            logging.warning("Could not wirte ?")
+    root.after(100,askSerial)
+
+def askWebSocket():
     try:
-        comPort.write('?'.encode())
+        wsapp.send("?\n".encode())
     except:
-        print("could not wirte ?")
-    # print('Sent: ?\n')
-    # print(pos)
-## Gets serial input from grbl and if it contains position data, updates it.
-## Called by Recevie Thread, so called on second thread on each serial polling
+        logging.warning("Could not send ?")
+    root.after(500,askWebSocket)
+
 def updatePos(picoLine):
     global pos
     if re.match(r'\<([^]]+)\>',picoLine):
@@ -284,7 +278,6 @@ url = 'ws://192.168.0.31:80'
 
 def on_open(ws):
     print('open ws success')
-    wsapp.send("?\n".encode())
 
 def on_message(ws, message):
     print('message ws:')
@@ -328,8 +321,11 @@ def focusSwitch(event):
         focusMain = True
 
 ## Config params
-ScreenWidth = 2560
-ScreenHeight = 1600
+# ScreenWidth = 2560
+# ScreenHeight = 1600
+
+ScreenWidth = 1920
+ScreenHeight = 1080
 
 ## Initialize pos and lines. It is being updated from the other thread,
 ## Careful with multithread modification
@@ -421,6 +417,8 @@ threading.Thread(target=create_ws).start()
 print("kdkdkskfksdkf")
 
 plotPos()
+askWebSocket()
+askSerial()
 
 root.bind('<KeyPress-r>',requestHoming)
 # root.bind('<KeyPress-r>', requestReset) 
