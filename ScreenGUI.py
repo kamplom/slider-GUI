@@ -10,6 +10,50 @@ import asyncio
 import websocket
 import logging
 
+import time
+
+logging.basicConfig(level=logging.INFO)
+
+class Table:
+    def __init__(self,root):
+        self.e = [ [None]*debugList_columns for _ in range(debugList_rows) ]
+        for i in range(debugList_rows):
+            for j in range(debugList_columns):
+                self.e[i][j] = Label(root, text = debugList[i][j], width=20, fg='blue',
+                               font=('Arial',16,'bold'))
+                self.e[i][j].grid(row=i, column=j)
+                # self.e[i][j].insert(END, debugList[i][j])
+    def remove(self, root):
+        global debugTable
+        for i in range(debugList_rows):
+            for j in range(debugList_columns):  
+                self.e[i][j].grid_remove()
+        debugTable = None
+        
+    def update(self,root):
+        global debugList
+        for i in range(debugList_rows):
+            self.e[i][1].configure(text=debugList[i][1]) 
+
+class TimerError(Exception):
+    logging.error('TimerError: ')
+
+class Timer:
+    def __init__(self):
+        self._start_time = None
+    def start(self):
+        if self._start_time is not None:
+            raise TimerError(f"Timer is running. Use .stop() to stop it")
+        self._start_time = time.perf_counter()
+
+    def stop(self):
+        if self._start_time is None:
+            raise TimerError(f"Timer is not running. Use .start() to start it")
+        elapsed_time = time.perf_counter() - self._start_time
+        self._start_time = None
+        return elapsed_time
+
+
 
 def updatePosText(text):
     text = text + unit
@@ -124,7 +168,20 @@ def ReceiveThread():
         except:
             logging.error('Serial port disconnected')
             connectSerial()
-            break;
+            break
+
+
+def releaseX(event):
+    global xTimer
+    global debugOverlay
+    stopTime = xTimer.stop()
+    logging.debug(f'Stop time: {stopTime:.4f}')
+    if stopTime > 0.66:
+        if debugOverlay == False:
+            debugOverlay = True
+            showDebugOverlay()
+        else:
+            debugOverlay = False
 
 
 def requestHoming(event):
@@ -194,6 +251,28 @@ def diffCallback(input):
         sendStream(jogCommand)
         sign = None
 
+
+def updateDebugList():
+    global debugList
+    debugList = [('grblState', grblState),
+       ('grblMqttConnected', grblMqttConnected),
+       ('pairConnected', pairConnected),
+       ('homed', homed),
+       ('allowMovement', allowMovement)]
+
+def showDebugOverlay():
+    global debugTable
+    # show overlay
+    if not debugTable:
+        debugTable = Table(root)
+    else:
+        updateDebugList()
+        debugTable.update(root)
+    if debugOverlay:
+        root.after(100, showDebugOverlay)
+    else:
+        debugTable.remove(root)
+        logging.info('Quiting debug overlay')
 
 def encoderCallback(input):
     jogCommand = '$J=G91 G21 X'+input+'10 F34800\n'
@@ -301,6 +380,8 @@ def unitSwitch(event):
 
 def focusSwitch(event):
     global focusMain
+    global xTimer
+    xTimer.start()
     if focusMain:
         focusMain = False
     elif not focusMain:
@@ -330,6 +411,23 @@ unit = ' m'
 sign = None
 wsapp = None
 focusMain = True
+debugOverlay = False
+xTimer = Timer()
+debugTable = False
+grblMqttConnected = False
+pairConnected = False
+homed = False
+allowMovement = False
+
+
+debugList = [('grblState', grblState),
+       ('grblMqttConnected', grblMqttConnected),
+       ('pairConnected', pairConnected),
+       ('homed', homed),
+       ('allowMovement', allowMovement)]
+debugList_rows = len(debugList)
+debugList_columns = len(debugList[0])
+
 
 #MQTT settings
 broker = 'broker.emqx.io'
@@ -412,6 +510,7 @@ root.bind('<KeyPress-r>',requestHoming)
 root.bind('<KeyPress-a>', introduceOffset)
 root.bind('<KeyPress-s>', unitSwitch)
 root.bind('<KeyPress-x>', focusSwitch)
+root.bind('<KeyRelease-x>', releaseX)
 
 root.bind('<KeyPress-1>', lambda event: numCallback('1'))
 root.bind('<KeyPress-2>', lambda event: numCallback('2'))
