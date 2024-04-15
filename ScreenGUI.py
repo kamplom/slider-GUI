@@ -12,7 +12,9 @@ import logging
 
 import time
 
-logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+logging.basicConfig(filename='example.log', encoding='utf-8', level=logging.DEBUG)
+logging.getLogger().addHandler(logging.StreamHandler())
 
 class Table:
     def __init__(self,root):
@@ -35,20 +37,17 @@ class Table:
         for i in range(debugList_rows):
             self.e[i][1].configure(text=debugList[i][1]) 
 
-class TimerError(Exception):
-    logging.error('TimerError: ')
-
 class Timer:
     def __init__(self):
         self._start_time = None
     def start(self):
         if self._start_time is not None:
-            raise TimerError(f"Timer is running. Use .stop() to stop it")
+            log.error(f"Timer is running. Use .stop() to stop it")
         self._start_time = time.perf_counter()
 
     def stop(self):
         if self._start_time is None:
-            raise TimerError(f"Timer is not running. Use .start() to start it")
+            log.error(f"Timer is not running. Use .start() to start it")
         elapsed_time = time.perf_counter() - self._start_time
         self._start_time = None
         return elapsed_time
@@ -72,11 +71,13 @@ def showOffsetText(show):
 def sendStream(text):
     global focusMain
     global wsapp
-    logging.info('FocusMain: '+ focusMain +': Sent: ' + text)
+    logger.info('FocusMain: '+ focusMain +': Sent: ' + text)
     if focusMain:
-        comPort.write(text.encode())
+        if comPort:
+            comPort.write(text.encode())
     elif not focusMain:
-        wsapp.send(text.encode())
+        if WSConnected:
+            wsapp.send(text.encode())
 
 def plotPos():
     global displayProd
@@ -89,7 +90,7 @@ def plotPos():
             updatePosText(displayPos)
             # canvas.itemconfig(posText, text=displayPos+' m')
         except:
-            logging.error('Tried to plot a Pos that is not a Float')
+            logger.error('Tried to plot a Pos that is not a Float')
     elif guiState == 'target':
         showOffsetText(False)
         updatePosText(userInput)
@@ -104,14 +105,15 @@ def askSerial():
         try:
             comPort.write('?'.encode())
         except:
-            logging.warning("Could not wirte ?")
+            logger.warning("Could not wirte ?")
     root.after(100,askSerial)
 
 def askWebSocket():
-    try:
-        wsapp.send("?\n".encode())
-    except:
-        logging.warning("WS: Could not send ?")
+    if WSConnected:
+        try:
+            wsapp.send("?\n".encode())
+        except:
+            logger.warning("WS: Could not send ?")
     root.after(1000,askWebSocket)
 
 def ReceiveThread():
@@ -161,12 +163,12 @@ def ReceiveThread():
                             elif unit == ' m':
                                 pos = aux
                 if not re.match(r'\<([^]]+)\>',lines):
-                    logging.warning('Message without <> formating:')
-                    logging.warning('\t'+lines)
+                    logger.warning('Message without <> formating:')
+                    logger.warning('\t'+lines)
             else:
                 time.sleep(0.01)
         except:
-            logging.error('Serial port disconnected')
+            logger.error('Serial port disconnected')
             connectSerial()
             break
 
@@ -175,7 +177,7 @@ def releaseX(event):
     global xTimer
     global debugOverlay
     stopTime = xTimer.stop()
-    logging.debug(f'Stop time: {stopTime:.4f}')
+    # logger.debug(f'Stop time: {stopTime:.4f}')
     if stopTime > 0.66:
         if debugOverlay == False:
             debugOverlay = True
@@ -186,7 +188,8 @@ def releaseX(event):
 
 def requestHoming(event):
     global wsapp
-    wsapp.send("?\n".encode())
+    if WSConnected:
+        wsapp.send("?\n".encode())
     # comPort.write('$H\n'.encode())
     sendStream('$HX\n')
     i = 0
@@ -201,11 +204,11 @@ def requestHoming(event):
 def requestReset(event):
     global resetNeed
     comPort.write(b'\x18')
-    logging.info('Sent: reset\n')
+    logger.info('Sent: reset\n')
     
 def requestJogTemp(event):
     comPort.write('$J=G91 G21 X-449.000 F34800\n'.encode())
-    logging.info('Sent: request jog\n')
+    logger.info('Sent: request jog\n')
 
 def requestJog(target, absolute):
     if unit == ' ft':
@@ -231,7 +234,7 @@ def introduceOffset(event):
 def numCallback(num):
     global userInput
     global guiState
-    logging.debug("Number pressed: " + num)
+    logger.debug("Number pressed: " + num)
     if guiState == 'distance':
         guiState = 'target'
     if guiState == 'offset' or guiState == 'target':
@@ -272,7 +275,7 @@ def showDebugOverlay():
         root.after(100, showDebugOverlay)
     else:
         debugTable.remove(root)
-        logging.info('Quiting debug overlay')
+        logger.info('Quiting debug overlay')
 
 def encoderCallback(input):
     jogCommand = '$J=G91 G21 X'+input+'10 F34800\n'
@@ -297,18 +300,18 @@ def enterCallback(event):
 
 def updateuserInput(num):
     global userInput
-    logging.debug('Previous user input: ' + userInput)
+    logger.debug('Previous user input: ' + userInput)
     if userInput == 'None':
         userInput = num
     elif len(userInput) < 5:
         userInput = userInput + num
-    logging.debug('Tried to append number: ' + num)
-    logging.debug('New user input: ' + userInput)
+    logger.debug('Tried to append number: ' + num)
+    logger.debug('New user input: ' + userInput)
 
 def clearInput(event):
     global guiState
     global userInput
-    logging.debut('Flushed user input')
+    logger.debut('Flushed user input')
     guiState = 'distance'
     userInput = 'None'
 
@@ -337,7 +340,7 @@ def connectSerial():
         except:
             time.sleep(1)
         if comPort:
-            logging.debut('Calling RecieveThread')
+            logger.debug('Calling RecieveThread')
             ReceiveThread()
 
 reply_timeout = 10
@@ -346,10 +349,16 @@ sleep_time = 5
 url = 'ws://192.168.0.31:80'
 
 def on_open(ws):
-    logging.info('WS successfully connected')
+    global WSConnected
+    WSConnected = True
+    logger.info('WS successfully connected')
 
 def on_message(ws, message):
-    logging.debug('WS message: '+ message.decode())
+    logger.debug('WS message: '+ message.decode())
+
+def on_close(ws, close_status_code, close_msg):
+    global WSConnected
+    WSConnected = False
 
 def create_ws():
     global wsapp
@@ -363,9 +372,9 @@ def create_ws():
             wsapp.run_forever(skip_utf8_validation=True,ping_interval=10,ping_timeout=8)
         except Exception as e:
             # gc.collect()
-            logging.error("Websocket connection Error  : {0}".format(e))                    
+            logger.error("Websocket connection Error  : {0}".format(e))                    
         
-        logging.error("Reconnecting websocket  after 5 sec")
+        logger.error("Reconnecting websocket  after 5 sec")
         time.sleep(5)
 
 def unitSwitch(event):
@@ -388,6 +397,7 @@ def focusSwitch(event):
         focusMain = True
     else:
         focusMain = True
+
 
 ## Config params
 # ScreenWidth = 2560
@@ -418,6 +428,7 @@ grblMqttConnected = False
 pairConnected = False
 homed = False
 allowMovement = False
+WSConnected = False
 
 
 debugList = [('grblState', grblState),
@@ -427,6 +438,7 @@ debugList = [('grblState', grblState),
        ('allowMovement', allowMovement)]
 debugList_rows = len(debugList)
 debugList_columns = len(debugList[0])
+
 
 
 #MQTT settings
