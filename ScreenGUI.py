@@ -28,7 +28,7 @@ def showOffsetText(show):
 def sendStream(text):
     global focusMain
     global wsapp
-    print('sent:' +text)
+    logging.info('FocusMain: '+ focusMain +': Sent: ' + text)
     if focusMain:
         comPort.write(text.encode())
     elif not focusMain:
@@ -45,7 +45,7 @@ def plotPos():
             updatePosText(displayPos)
             # canvas.itemconfig(posText, text=displayPos+' m')
         except:
-            print('not a float')
+            logging.error('Tried to plot a Pos that is not a Float')
     elif guiState == 'target':
         showOffsetText(False)
         updatePosText(userInput)
@@ -67,17 +67,8 @@ def askWebSocket():
     try:
         wsapp.send("?\n".encode())
     except:
-        logging.warning("Could not send ?")
-    root.after(500,askWebSocket)
-
-def updatePos(picoLine):
-    global pos
-    if re.match(r'\<([^]]+)\>',picoLine):
-        pos = re.split(r',|:',picoLine)[1]
-        pos = float(pos)
-        if unit == ' ft':
-            pos = pos * 3.28084
-    return
+        logging.warning("WS: Could not send ?")
+    root.after(1000,askWebSocket)
 
 def ReceiveThread():
     global wsapp
@@ -126,13 +117,16 @@ def ReceiveThread():
                             elif unit == ' m':
                                 pos = aux
                 if not re.match(r'\<([^]]+)\>',lines):
-                    print(lines)
+                    logging.warning('Message without <> formating:')
+                    logging.warning('\t'+lines)
             else:
                 time.sleep(0.01)
         except:
-            print("disconnected port")
+            logging.error('Serial port disconnected')
             connectSerial()
             break;
+
+
 def requestHoming(event):
     global wsapp
     wsapp.send("?\n".encode())
@@ -150,11 +144,11 @@ def requestHoming(event):
 def requestReset(event):
     global resetNeed
     comPort.write(b'\x18')
-    print('Sent: reset\n')
+    logging.info('Sent: reset\n')
     
 def requestJogTemp(event):
     comPort.write('$J=G91 G21 X-449.000 F34800\n'.encode())
-    print('Sent: request jog\n')
+    logging.info('Sent: request jog\n')
 
 def requestJog(target, absolute):
     if unit == ' ft':
@@ -164,10 +158,7 @@ def requestJog(target, absolute):
     if absolute:
         target = (float(target)-offset)*1000
         jogCommand = '$J=G90 G21 X-'+'{:.3f}'.format(target)+ ' F34800\n'
-        print(jogCommand)
-        # comPort.write(jogCommand.encode())
         sendStream(jogCommand)
-        print('Sent: request jog\n')
     else:
         jogCommand = '$J=G91 G21 X'+target+' F8000'
 
@@ -183,10 +174,10 @@ def introduceOffset(event):
 def numCallback(num):
     global userInput
     global guiState
+    logging.debug("Number pressed: " + num)
     if guiState == 'distance':
         guiState = 'target'
     if guiState == 'offset' or guiState == 'target':
-        print(num)
         updateuserInput (num)
 
 def diffCallback(input):
@@ -200,9 +191,7 @@ def diffCallback(input):
             sign = None
     else:
         jogCommand = '$J=G91 G21 X'+sign+input+' F34800\n'
-        print(jogCommand)
-        comPort.write(jogCommand.encode())
-        print('Sent: request jog\n')
+        sendStream(jogCommand)
         sign = None
 
 
@@ -219,7 +208,6 @@ def enterCallback(event):
     if guiState == 'target':
         if not userInput == 'None':
             requestJog(userInput, True)
-            print('goint there')
             userInput = 'None'
             guiState = 'distance'
     elif guiState == 'offset':
@@ -230,16 +218,18 @@ def enterCallback(event):
 
 def updateuserInput(num):
     global userInput
+    logging.debug('Previous user input: ' + userInput)
     if userInput == 'None':
         userInput = num
     elif len(userInput) < 5:
         userInput = userInput + num
-        print(userInput)
+    logging.debug('Tried to append number: ' + num)
+    logging.debug('New user input: ' + userInput)
 
 def clearInput(event):
     global guiState
     global userInput
-    print("flush input")
+    logging.debut('Flushed user input')
     guiState = 'distance'
     userInput = 'None'
 
@@ -268,7 +258,7 @@ def connectSerial():
         except:
             time.sleep(1)
         if comPort:
-            print("calling receiveThread")
+            logging.debut('Calling RecieveThread')
             ReceiveThread()
 
 reply_timeout = 10
@@ -277,28 +267,26 @@ sleep_time = 5
 url = 'ws://192.168.0.31:80'
 
 def on_open(ws):
-    print('open ws success')
+    logging.info('WS successfully connected')
 
 def on_message(ws, message):
-    print('message ws:')
-    print(message.decode())
+    logging.debug('WS message: '+ message.decode())
 
 def create_ws():
     global wsapp
     while True:
-        print('trying')
         try:
             websocket.enableTrace(False)
             wsapp = websocket.WebSocketApp(url,
                                         on_message = on_message)
             wsapp.on_open = on_open
             wsapp.on_message = on_message
-            print('running forever')
             wsapp.run_forever(skip_utf8_validation=True,ping_interval=10,ping_timeout=8)
         except Exception as e:
             # gc.collect()
-            print("Websocket connection Error  : {0}".format(e))                    
-        print("Reconnecting websocket  after 5 sec")
+            logging.error("Websocket connection Error  : {0}".format(e))                    
+        
+        logging.error("Reconnecting websocket  after 5 sec")
         time.sleep(5)
 
 def unitSwitch(event):
@@ -413,8 +401,6 @@ zigzagLogo.place(relx=0.5, rely=0.2, anchor='c')
 threading.Thread(target=connectSerial).start()
 
 threading.Thread(target=create_ws).start()
-
-print("kdkdkskfksdkf")
 
 plotPos()
 askWebSocket()
