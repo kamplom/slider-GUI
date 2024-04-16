@@ -1,0 +1,81 @@
+ERROR:__main__:TimerError: 
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+INFO:__main__:Quiting debug overlay
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+ERROR:__main__:TimerError: 
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+ERROR:websocket:[Errno 110] Connection timed out - goodbye
+ERROR:__main__:Reconnecting websocket  after 5 sec
+DEBUG:PIL.PngImagePlugin:STREAM b'IHDR' 16 13
+DEBUG:PIL.PngImagePlugin:STREAM b'zTXt' 41 100
+DEBUG:PIL.PngImagePlugin:STREAM b'iCCP' 153 276
+DEBUG:PIL.PngImagePlugin:iCCP profile name b'icm'
+DEBUG:PIL.PngImagePlugin:Compression method 0
+DEBUG:PIL.PngImagePlugin:STREAM b'IDAT' 441 8192
+DEBUG:__main__:Stop time: 0.3995
+DEBUG:__main__:Stop time: 0.6604
+DEBUG:__main__:Stop time: 0.0332
+DEBUG:__main__:Stop time: 0.0397
+DEBUG:__main__:Stop time: 0.0402
+DEBUG:__main__:Stop time: 0.0392
+DEBUG:__main__:Stop time: 0.0406
+DEBUG:__main__:Stop time: 0.0399
+DEBUG:__main__:Stop time: 0.0403
+DEBUG:__main__:Stop time: 0.0402
+DEBUG:__main__:Stop time: 0.0390
+DEBUG:__main__:Stop time: 0.0403
+DEBUG:__main__:Stop time: 0.0143
+DEBUG:__main__:Stop time: 0.6595
+DEBUG:__main__:Stop time: 0.0406
+DEBUG:__main__:Stop time: 0.0394
+DEBUG:__main__:Stop time: 0.0405
+DEBUG:__main__:Stop time: 0.0400
+DEBUG:__main__:Stop time: 0.0398
+DEBUG:__main__:Stop time: 0.0395
+DEBUG:__main__:Stop time: 0.0320
+DEBUG:PIL.PngImagePlugin:STREAM b'IHDR' 16 13
+DEBUG:PIL.PngImagePlugin:STREAM b'zTXt' 41 100
+DEBUG:PIL.PngImagePlugin:STREAM b'iCCP' 153 276
+DEBUG:PIL.PngImagePlugin:iCCP profile name b'icm'
+DEBUG:PIL.PngImagePlugin:Compression method 0
+DEBUG:PIL.PngImagePlugin:STREAM b'IDAT' 441 8192
+INFO:__main__:Quiting debug overlay
+INFO:__main__:Quiting debug overlay
+INFO:__main__:Quiting debug overlay
+INFO:__main__:Quiting debug overlay
+INFO:__main__:Quiting debug overlay
+INFO:__main__:Quiting debug overlay

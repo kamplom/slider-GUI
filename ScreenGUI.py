@@ -9,12 +9,21 @@ import serial.tools.list_ports
 import asyncio
 import websocket
 import logging
+import os
+import cv2
+from dataclasses import dataclass
 
 import time
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(filename='example.log', encoding='utf-8', level=logging.DEBUG)
+logging.basicConfig(filename='example.log', encoding='utf-8', level=logging.INFO)
 logging.getLogger().addHandler(logging.StreamHandler())
+
+@dataclass
+class Employee:
+    name: str = ''
+    filename: str = ''
+    img: ... = None
 
 class Table:
     def __init__(self,root):
@@ -261,7 +270,8 @@ def updateDebugList():
        ('grblMqttConnected', grblMqttConnected),
        ('pairConnected', pairConnected),
        ('homed', homed),
-       ('allowMovement', allowMovement)]
+       ('allowMovement', allowMovement),
+       ('WSConnected', WSConnected)]
 
 def showDebugOverlay():
     global debugTable
@@ -280,7 +290,7 @@ def showDebugOverlay():
 def encoderCallback(input):
     jogCommand = '$J=G91 G21 X'+input+'10 F34800\n'
     sendStream(jogCommand)
-    # comPort.write(jogCommand.encode())
+
 def enterCallback(event):
     global guiState
     global userInput
@@ -326,6 +336,31 @@ def onMqttMessage(client, userdata, msg):
         array = msg[1:].split(';')
         prod = array[0]
         proy = array[1]
+        plotProd
+
+def plotProd():
+    if prod == '' and proy == '':
+        #place ZZ logo
+        zigzagLogo.place(relx=0.5, rely=0.2, anchor='c')
+    else:
+        zigzagLogo.place_forget()
+        #remove ZZ logo
+        #add text fields
+
+def getEmployees():
+    images = []
+    
+    for filename in os.listdir('./Employees'):
+        employee = Employee()
+        employee.img = cv2.imread(os.path.join('./Employees',filename))
+        if employee.img is not None:
+            employee.filename = filename
+            employee.name = parseEmployeeName(filename)
+            images.append(employee)
+    return images
+
+def parseEmployeeName(filename):
+    return filename.replace('-', ' ').rsplit('.',1)[0]
 
 def connectSerial():
     global comPort
@@ -398,6 +433,14 @@ def focusSwitch(event):
     else:
         focusMain = True
 
+def plotArrows():
+    logger.debug('Plot arrows')
+    # call it when sending any jog thing.
+    # maybe animate it
+    #if target > pos:
+        # green arrow
+    # else:
+    #     red arrow
 
 ## Config params
 # ScreenWidth = 2560
@@ -430,12 +473,8 @@ homed = False
 allowMovement = False
 WSConnected = False
 
+updateDebugList()
 
-debugList = [('grblState', grblState),
-       ('grblMqttConnected', grblMqttConnected),
-       ('pairConnected', pairConnected),
-       ('homed', homed),
-       ('allowMovement', allowMovement)]
 debugList_rows = len(debugList)
 debugList_columns = len(debugList[0])
 
@@ -458,6 +497,8 @@ mqttClient.loop_start()
 mqttClient.subscribe(topic)
 mqttClient.on_message = onMqttMessage
 
+employeeList = getEmployees()
+
 root = Tk()
 root.geometry(str(ScreenWidth)+'x'+str(ScreenHeight))
 root.attributes("-fullscreen", True)  # substitute `Tk` for whatever your `Tk()` object is called
@@ -466,6 +507,9 @@ canvas = Canvas(root, bg="white", width=ScreenWidth, height=ScreenHeight)
 canvas.place(x=0,y=0)
 
 canvas.create_rectangle(0, 0, ScreenWidth, 500, fill="#f6a0a0", outline='')
+
+employeeCanvas = Canvas(root, bg="#f6a0a0", width=0.4*ScreenWidth, height=0.1*ScreenHeight)
+employeeCanvas.place(x=ScreenWidth/2,y=ScreenHeight*0.4, anchor='center')
 
 # posText = canvas.create_text(ScreenWidth/2, 1080*0.65, text='4562.256', anchor='center', font=('Carlito', 225, 'bold'))
 
@@ -504,6 +548,7 @@ offsetText.tag_configure("center", justify='center')
 zigzagImg = Image.open('./zigzag.png')
 zigzagImg = zigzagImg.resize((250, 250))
 zigzagImg = ImageTk.PhotoImage(zigzagImg)
+
 zigzagLogo = Label(root, image = zigzagImg)
 
 zigzagLogo.place(relx=0.5, rely=0.2, anchor='c')
