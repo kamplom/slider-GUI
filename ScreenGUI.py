@@ -77,10 +77,19 @@ def showOffsetText(show):
         offsetText.place_forget()
 
 
+
+def WPosToMPos (position):
+    position = position -5177 -1054
+    return position
+
+def MPosToWPos (position):
+    position = position +5177 +1054
+    return position
+
 def sendStream(text):
     global focusMain
     global wsapp
-    logger.info('FocusMain: '+ focusMain +': Sent: ' + text)
+    logger.info(f'FocusMain: {focusMain}: Sent: {text}')
     if focusMain:
         if comPort:
             comPort.write(text.encode())
@@ -95,7 +104,7 @@ def plotPos():
     if guiState == 'distance':
         showOffsetText(False)
         try:
-            displayPos = '{:.3f}'.format((abs(pos))/1000+offset)
+            displayPos = '{:.3f}'.format((abs(MPosToWPos(Mpos)))/1000+offset)
             updatePosText(displayPos)
             # canvas.itemconfig(posText, text=displayPos+' m')
         except:
@@ -137,11 +146,11 @@ def ReceiveThread():
                 global grblState
                 global unit
 
-                global pos
-                global grblMqttConnected
-                global pairConnected
-                global homed
-                global allowMovement
+                global Mpos
+                global mainMqttConnected
+                global mainPairConnected
+                global mainHomed
+                global mainAllowMovement
                 lines = comPort.readline().decode('utf-8')
                 
                 listOfStates = ['Idle', 'Run', 'Hold', 'Jog', 'Alarm', 'Door', 'Check', 'Home', 'Sleep']
@@ -154,23 +163,25 @@ def ReceiveThread():
                     resetNeed = True
 
                 if re.match(r'\<([^]]+)\>',lines):
-                    fields = lines.split('|')
+                    fields = lines.split('<')[1]
+                    fields = fields.split('>')[0]
+                    fields = fields.split('|')
                     for field in fields:
                         if 'Mqtt' in field:
-                            grblMqttConnected = re.split(':',field)[1]
+                            mainMqttConnected = re.split(':',field)[1]
                         elif 'AlwMov' in field:
-                            allowMovement = re.split(':',field)[1]
+                            mainAllowMovement = re.split(':',field)[1]
                         elif 'Pair' in field:
-                            pairConnected = re.split(':',field)[1]
+                            mainPairConnected = re.split(':',field)[1]
                         elif 'Homed' in field:
-                            homed = re.split(':',field)[1]
+                            mainHomed = re.split(':',field)[1]
                         elif 'Pos' in field:
                             aux = re.split(r',|:',field)[1]
                             aux = float(aux)
                             if unit == ' ft':
-                                pos = aux * 3.28084
+                                Mpos = aux * 3.28084
                             elif unit == ' m':
-                                pos = aux
+                                Mpos = aux
                 if not re.match(r'\<([^]]+)\>',lines):
                     logger.warning('Message without <> formating:')
                     logger.warning('\t'+lines)
@@ -186,8 +197,8 @@ def releaseX(event):
     global xTimer
     global debugOverlay
     stopTime = xTimer.stop()
-    # logger.debug(f'Stop time: {stopTime:.4f}')
-    if stopTime > 0.66:
+    logger.debug(f'Stop time: {stopTime:.4f}')
+    if stopTime > 0.57:
         if debugOverlay == False:
             debugOverlay = True
             showDebugOverlay()
@@ -226,7 +237,8 @@ def requestJog(target, absolute):
         target = '{:.4f}'.format((abs(target)))
     if absolute:
         target = (float(target)-offset)*1000
-        jogCommand = '$J=G90 G21 X-'+'{:.3f}'.format(target)+ ' F34800\n'
+        target = WPosToMPos(target)
+        jogCommand = '$J=G90 G21 X'+'{:.3f}'.format(target)+ ' F34800\n'
         sendStream(jogCommand)
     else:
         jogCommand = '$J=G91 G21 X'+target+' F8000'
@@ -267,11 +279,12 @@ def diffCallback(input):
 def updateDebugList():
     global debugList
     debugList = [('grblState', grblState),
-       ('grblMqttConnected', grblMqttConnected),
-       ('pairConnected', pairConnected),
-       ('homed', homed),
-       ('allowMovement', allowMovement),
-       ('WSConnected', WSConnected)]
+       ('mainMqttConnected', mainMqttConnected),
+       ('mainPairConnected', mainPairConnected),
+       ('mainHomed', mainHomed),
+       ('mainAllowMovement', mainAllowMovement),
+       ('WSConnected', WSConnected),
+       ('FocusMain', focusMain)]
 
 def showDebugOverlay():
     global debugTable
@@ -370,8 +383,8 @@ def connectSerial():
             if 'CP2102' in p.description:
                 port = p.device
         try:
-            comPort = serial.Serial('/dev/ttyUSB2',115200)
-            # comPort = serial.Serial(port,115200)
+            # comPort = serial.Serial('/dev/ttyUSB2',115200)
+            comPort = serial.Serial(port,115200)
         except:
             time.sleep(1)
         if comPort:
@@ -451,7 +464,7 @@ ScreenHeight = 1080
 
 ## Initialize pos and lines. It is being updated from the other thread,
 ## Careful with multithread modification
-pos = 0.0
+Mpos = 0.0
 lines = ''
 alarmState = 0
 resetNeed = False
@@ -467,10 +480,10 @@ focusMain = True
 debugOverlay = False
 xTimer = Timer()
 debugTable = False
-grblMqttConnected = False
-pairConnected = False
-homed = False
-allowMovement = False
+mainMqttConnected = False
+mainPairConnected = False
+mainHomed = False
+mainAllowMovement = False
 WSConnected = False
 
 updateDebugList()
