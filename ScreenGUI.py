@@ -79,11 +79,11 @@ def showOffsetText(show):
 
 
 def WPosToMPos (position):
-    position = position -5177 -1054
+    position = position -5177 -1054 + offset
     return position
 
 def MPosToWPos (position):
-    position = position +5177 +1054
+    position = position +5177 +1054 - offset
     return position
 
 def sendStream(text):
@@ -112,7 +112,7 @@ def plotPos():
         showOffsetText(False)
         try:
             aux = unitCorrection(abs(MPosToWPos(Mpos)))
-            displayPos = '{:.3f}'.format((aux)/1000+offset)
+            displayPos = '{:.3f}'.format((aux)/1000)
             updatePosText(displayPos)
             # canvas.itemconfig(posText, text=displayPos+' m')
         except:
@@ -241,7 +241,7 @@ def requestJog(target, absolute):
         target = target / 3.28084
         target = '{:.4f}'.format((abs(target)))
     if absolute:
-        target = (float(target)-offset)*1000
+        target = (float(target))*1000
         target = WPosToMPos(target)
         jogCommand = '$J=G90 G21 X'+'{:.3f}'.format(target)+ ' F34800\n'
         sendStream(jogCommand)
@@ -435,10 +435,10 @@ def unitSwitch(event):
     global offset
     if unit == ' m':
         unit = ' ft'
-        offset = offset * 3.28084
+        # offset = offset * 3.28084
     else:
         unit = ' m'
-        offset = offset / 3.28084
+        # offset = offset / 3.28084
 
 def focusSwitch(event):
     global focusMain
