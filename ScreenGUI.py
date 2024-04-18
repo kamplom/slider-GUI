@@ -339,7 +339,7 @@ def updateuserInput(num):
 def clearInput(event):
     global guiState
     global userInput
-    logger.debut('Flushed user input')
+    logger.debug('Flushed user input')
     guiState = 'distance'
     userInput = 'None'
 
