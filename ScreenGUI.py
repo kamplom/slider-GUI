@@ -524,7 +524,7 @@ root.attributes("-fullscreen", True)  # substitute `Tk` for whatever your `Tk()`
 canvas = Canvas(root, bg="white", width=ScreenWidth, height=ScreenHeight)
 canvas.place(x=0,y=0)
 
-canvas.create_rectangle(0, 0, ScreenWidth, ScreenHeight*0.4, fill="#f6a0a0", outline='')
+canvas.create_rectangle(0, 0, ScreenWidth, ScreenHeight*0.45, fill="#f6a0a0", outline='')
 
 employeeCanvas = Canvas(root, bg="#f6a0a0", width=0.4*ScreenWidth, height=0.1*ScreenHeight)
 employeeCanvas.place(x=ScreenWidth/2,y=ScreenHeight*0.4, anchor='center')
