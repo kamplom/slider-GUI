@@ -16,7 +16,7 @@ from dataclasses import dataclass
 import time
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(filename='example.log', encoding='utf-8', level=logging.DEBUG)
+logging.basicConfig(filename=os.path.expanduser('~')+'/example.log', encoding='utf-8', level=logging.DEBUG)
 logging.getLogger().addHandler(logging.StreamHandler())
 
 @dataclass
