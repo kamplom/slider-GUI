@@ -71970,3 +71970,776 @@ WARNING:__main__:WS: Could not send ?
 WARNING:__main__:WS: Could not send ?
 INFO:websocket:Websocket connected
 INFO:__main__:WS successfully connected
+DEBUG:PIL.PngImagePlugin:STREAM b'IHDR' 16 13
+DEBUG:PIL.PngImagePlugin:STREAM b'zTXt' 41 100
+DEBUG:PIL.PngImagePlugin:STREAM b'iCCP' 153 276
+DEBUG:PIL.PngImagePlugin:iCCP profile name b'icm'
+DEBUG:PIL.PngImagePlugin:Compression method 0
+DEBUG:PIL.PngImagePlugin:STREAM b'IDAT' 441 8192
+INFO:websocket:Websocket connected
+INFO:__main__:WS successfully connected
+DEBUG:__main__:WS message: 
+GrblHAL 1.1f ['$' or '$HELP' for help]
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,
+DEBUG:__main__:WS message: 0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:HS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:RHS>
+
+DEBUG:__main__:Stop time: 0.1078
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:HS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000
+DEBUG:__main__:WS message: |Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:RHS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:websocket:Sending ping
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|
+DEBUG:__main__:WS message: MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:RHS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:RHS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+ERROR:websocket:ping/pong timed out - goodbye
+ERROR:__main__:Reconnecting websocket  after 5 sec
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+INFO:websocket:Websocket connected
+INFO:__main__:WS successfully connected
+DEBUG:__main__:WS message: 
+GrblHAL 1.1f ['$' or '$HELP' for help]
+
+DEBUG:__main__:WS message: <
+DEBUG:__main__:WS message: Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:RHS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:RHS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:RHS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:
+DEBUG:__main__:WS message: 0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:websocket:Sending ping
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+ERROR:websocket:ping/pong timed out - goodbye
+ERROR:__main__:Reconnecting websocket  after 5 sec
+DEBUG:__main__:Stop time: 0.1006
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+INFO:__main__:FocusMain: True: Sent: $J=G91 G21 X-minus F34800
+
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+INFO:websocket:Websocket connected
+INFO:__main__:WS successfully connected
+DEBUG:__main__:WS message: 
+GrblHAL 1.1f ['$' or '$HELP' for help]
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:RHS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:RHS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:HS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:websocket:Sending ping
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:RHS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:RHS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:RHS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:RHS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:RHS>
+
+ERROR:websocket:ping/pong timed out - goodbye
+ERROR:__main__:Reconnecting websocket  after 5 sec
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+INFO:websocket:Websocket connected
+INFO:__main__:WS successfully connected
+DEBUG:__main__:WS message: 
+GrblHAL 1.1f ['$' or '$HELP' for help]
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:RHS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:RHS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:RHS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:RHS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:RHS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:RHS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:
+DEBUG:__main__:WS message: 0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:H>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0
+DEBUG:__main__:WS message: |Pn:RHS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:HS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:RHS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:HS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:HS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:HS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:HS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0
+DEBUG:__main__:WS message: |Pn:HS>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:H>
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:H>
+
+DEBUG:websocket:Sending ping
+INFO:__main__:FocusMain: True: Sent: $J=G91 G21 X-10 F34800
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:H>
+
+INFO:__main__:FocusMain: True: Sent: $J=G91 G21 X+10 F34800
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+INFO:__main__:FocusMain: True: Sent: $HX
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:HS>
+
+ERROR:websocket:ping/pong timed out - goodbye
+ERROR:__main__:Reconnecting websocket  after 5 sec
+DEBUG:__main__:Stop time: 0.0002
+WARNING:__main__:WS: Could not send ?
+INFO:websocket:Websocket connected
+INFO:__main__:WS successfully connected
+DEBUG:__main__:WS message: 
+GrblHAL 1.1f ['$' or '$HELP' for help]
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:__main__:Stop time: 0.2000
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+INFO:__main__:FocusMain: True: Sent: $HX
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+INFO:__main__:FocusMain: True: Sent: $HX
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:H>
+
+DEBUG:websocket:Sending ping
+INFO:__main__:FocusMain: True: Sent: $HX
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:HS>
+
+DEBUG:websocket:Sending ping
+INFO:__main__:FocusMain: True: Sent: $HX
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0>
+
+DEBUG:websocket:Sending ping
+INFO:__main__:FocusMain: True: Sent: $HX
+
+DEBUG:__main__:WS message: <Hold:0|MPos:0.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:0|Pn:H>
+
+DEBUG:websocket:Sending ping
+INFO:__main__:FocusMain: True: Sent: $HX
+
+DEBUG:websocket:Sending ping
+INFO:__main__:FocusMain: True: Sent: $HX
+
+DEBUG:websocket:Sending ping
+INFO:__main__:FocusMain: True: Sent: $HX
+
+ERROR:websocket:ping/pong timed out - goodbye
+INFO:__main__:FocusMain: True: Sent: $HX
+
+ERROR:__main__:Reconnecting websocket  after 5 sec
+WARNING:__main__:WS: Could not send ?
+DEBUG:__main__:Stop time: 0.0000
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+ERROR:websocket:[Errno 113] No route to host - goodbye
+ERROR:__main__:Reconnecting websocket  after 5 sec
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+DEBUG:PIL.PngImagePlugin:STREAM b'IHDR' 16 13
+DEBUG:PIL.PngImagePlugin:STREAM b'zTXt' 41 100
+DEBUG:PIL.PngImagePlugin:STREAM b'iCCP' 153 276
+DEBUG:PIL.PngImagePlugin:iCCP profile name b'icm'
+DEBUG:PIL.PngImagePlugin:Compression method 0
+DEBUG:PIL.PngImagePlugin:STREAM b'IDAT' 441 8192
+ERROR:websocket:[Errno 113] No route to host - goodbye
+ERROR:__main__:Reconnecting websocket  after 5 sec
+DEBUG:PIL.PngImagePlugin:STREAM b'IHDR' 16 13
+DEBUG:PIL.PngImagePlugin:STREAM b'zTXt' 41 100
+DEBUG:PIL.PngImagePlugin:STREAM b'iCCP' 153 276
+DEBUG:PIL.PngImagePlugin:iCCP profile name b'icm'
+DEBUG:PIL.PngImagePlugin:Compression method 0
+DEBUG:PIL.PngImagePlugin:STREAM b'IDAT' 441 8192
+INFO:websocket:Websocket connected
+INFO:__main__:WS successfully connected
+DEBUG:__main__:WS message: 
+GrblHAL 1.1f ['$' or '$HELP' for help]
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|H:1,1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:Stop time: 0.1657
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:RHS>
+ok
+
+INFO:__main__:FocusMain: False: Sent: $HX
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1
+DEBUG:__main__:WS message: |AlwMov:1|Pair:0|Homed:1|Pn:H>
+ok
+
+DEBUG:__main__:WS message: <Home|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+
+DEBUG:__main__:WS message: [MSG:]
+ok
+
+DEBUG:__main__:Stop time: 0.0002
+DEBUG:__main__:Stop time: 0.0001
+DEBUG:__main__:Stop time: 0.0002
+DEBUG:__main__:Stop time: 0.0001
+DEBUG:__main__:Stop time: 0.0002
+DEBUG:__main__:Stop time: 0.0001
+DEBUG:__main__:Stop time: 0.0001
+DEBUG:__main__:Stop time: 0.0002
+DEBUG:__main__:Stop time: 0.0002
+DEBUG:__main__:Stop time: 0.0001
+DEBUG:__main__:Stop time: 0.0001
+DEBUG:__main__:Stop time: 0.0001
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:RHS|H:1,1>
+ok
+
+DEBUG:__main__:Stop time: 0.0211
+DEBUG:__main__:Stop time: 0.0405
+DEBUG:__main__:Stop time: 0.0400
+DEBUG:__main__:Stop time: 0.0400
+DEBUG:__main__:Stop time: 0.0391
+DEBUG:__main__:Stop time: 0.0401
+DEBUG:__main__:Stop time: 0.0398
+DEBUG:__main__:Stop time: 0.0403
+DEBUG:__main__:Stop time: 0.0392
+DEBUG:__main__:Stop time: 0.0402
+DEBUG:__main__:Stop time: 0.0399
+DEBUG:__main__:Stop time: 0.0401
+DEBUG:__main__:Stop time: 0.0403
+DEBUG:__main__:Stop time: 0.0395
+DEBUG:__main__:Stop time: 0.0397
+DEBUG:__main__:Stop time: 0.0399
+DEBUG:__main__:Stop time: 0.0402
+DEBUG:__main__:Stop time: 0.0400
+DEBUG:__main__:Stop time: 0.0398
+DEBUG:__main__:Stop time: 0.0399
+DEBUG:__main__:Stop time: 0.0399
+DEBUG:__main__:Stop time: 0.0402
+DEBUG:__main__:Stop time: 0.0398
+DEBUG:__main__:Stop time: 0.0399
+DEBUG:__main__:Stop time: 0.0401
+DEBUG:__main__:WS message: <
+DEBUG:__main__:WS message: Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:H>
+ok
+
+DEBUG:__main__:Stop time: 0.0398
+DEBUG:__main__:Stop time: 0.0399
+DEBUG:__main__:Stop time: 0.0400
+DEBUG:__main__:Stop time: 0.0399
+DEBUG:__main__:Stop time: 0.0399
+DEBUG:__main__:Stop time: 0.0403
+DEBUG:__main__:Stop time: 0.0398
+DEBUG:__main__:Stop time: 0.0403
+DEBUG:__main__:Stop time: 0.0387
+DEBUG:__main__:Stop time: 0.0398
+DEBUG:__main__:Stop time: 0.0397
+DEBUG:__main__:Stop time: 0.0293
+DEBUG:__main__:WS message: <Idle|MPos:
+DEBUG:__main__:WS message: -5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:RHS>
+ok
+
+DEBUG:__main__:Stop time: 0.1533
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:RHS>
+ok
+
+DEBUG:__main__:Stop time: 0.6004
+DEBUG:__main__:Stop time: 0.0345
+DEBUG:__main__:Stop time: 0.0399
+DEBUG:__main__:Stop time: 0.0405
+DEBUG:__main__:Stop time: 0.0401
+DEBUG:__main__:Stop time: 0.0407
+DEBUG:__main__:Stop time: 0.0399
+DEBUG:__main__:Stop time: 0.0407
+DEBUG:__main__:Stop time: 0.0391
+DEBUG:__main__:Stop time: 0.0401
+DEBUG:__main__:Stop time: 0.0402
+DEBUG:__main__:Stop time: 0.0393
+DEBUG:__main__:Stop time: 0.0079
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:websocket:Sending ping
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:RHS>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:HS>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:HS>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:HS>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:Stop time: 0.1199
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:HS>
+ok
+
+DEBUG:__main__:Stop time: 0.1504
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:HS>
+ok
+
+DEBUG:__main__:Stop time: 0.1491
+DEBUG:__main__:Stop time: 0.2024
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:HS>
+ok
+
+ERROR:websocket:ping/pong timed out - goodbye
+ERROR:__main__:Reconnecting websocket  after 5 sec
+DEBUG:__main__:Stop time: 0.5999
+DEBUG:__main__:Stop time: 0.0397
+DEBUG:__main__:Stop time: 0.0403
+INFO:__main__:Quiting debug overlay
+DEBUG:__main__:Stop time: 0.0398
+DEBUG:__main__:Stop time: 0.0401
+DEBUG:__main__:Stop time: 0.0400
+DEBUG:__main__:Stop time: 0.0406
+DEBUG:__main__:Stop time: 0.0396
+DEBUG:__main__:Stop time: 0.0399
+DEBUG:__main__:Stop time: 0.0403
+DEBUG:__main__:Stop time: 0.0403
+DEBUG:__main__:Stop time: 0.0393
+WARNING:__main__:WS: Could not send ?
+DEBUG:__main__:Stop time: 0.0397
+DEBUG:__main__:Stop time: 0.0399
+DEBUG:__main__:Stop time: 0.0291
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+INFO:websocket:Websocket connected
+INFO:__main__:WS successfully connected
+DEBUG:__main__:WS message: 
+GrblHAL 1.1f ['$' or '$HELP' for help]
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.0
+DEBUG:__main__:WS message: 00,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:RHS>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000
+DEBUG:__main__:WS message: |Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:
+DEBUG:__main__:WS message: -5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:RHS>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000
+DEBUG:__main__:WS message: |Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:RHS>
+ok
+
+DEBUG:websocket:Sending ping
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:RHS>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+ERROR:websocket:ping/pong timed out - goodbye
+ERROR:__main__:Reconnecting websocket  after 5 sec
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+INFO:websocket:Websocket connected
+INFO:__main__:WS successfully connected
+DEBUG:__main__:WS message: 
+GrblHAL 1.1f ['$' or '$HELP' for help]
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:RHS>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:RHS>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:RHS>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:
+DEBUG:__main__:WS message: -5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:RHS>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:RHS>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:RHS>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:H>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:RHS>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:HS>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:HS>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:HS>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:HS>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:H>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:H>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:websocket:Sending ping
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:RHS>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:H>
+ok
+
+ERROR:websocket:ping/pong timed out - goodbye
+ERROR:__main__:Reconnecting websocket  after 5 sec
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+WARNING:__main__:WS: Could not send ?
+INFO:websocket:Websocket connected
+INFO:__main__:WS successfully connected
+DEBUG:__main__:WS message: 
+GrblHAL 1.1f ['$' or '$HELP' for help]
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:RHS>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:RHS>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:RHS>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:RHS>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:RHS>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000
+DEBUG:__main__:WS message: |Mqtt:1|AlwMov:1|Pair:0|Homed:1>
+ok
+
+DEBUG:__main__:WS message: <Idle|MPos:-5998.000,0.000,0.000|Mqtt:1|AlwMov:1|Pair:0|Homed:1|Pn:RHS>
+ok
+

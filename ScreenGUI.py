@@ -198,7 +198,7 @@ def releaseX(event):
     global debugOverlay
     stopTime = xTimer.stop()
     logger.debug(f'Stop time: {stopTime:.4f}')
-    if stopTime > 0.57:
+    if stopTime > 0.395:
         if debugOverlay == False:
             debugOverlay = True
             showDebugOverlay()
