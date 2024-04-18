@@ -97,6 +97,13 @@ def sendStream(text):
         if WSConnected:
             wsapp.send(text.encode())
 
+def unitCorrection(pos):
+    if unit == ' ft':
+        pos = pos * 3.28084
+    else:
+        pos = pos
+    return pos
+
 def plotPos():
     global displayProd
     global displayProy
@@ -104,7 +111,8 @@ def plotPos():
     if guiState == 'distance':
         showOffsetText(False)
         try:
-            displayPos = '{:.3f}'.format((abs(MPosToWPos(Mpos)))/1000+offset)
+            aux = unitCorrection(abs(MPosToWPos(Mpos)))
+            displayPos = '{:.3f}'.format((aux)/1000+offset)
             updatePosText(displayPos)
             # canvas.itemconfig(posText, text=displayPos+' m')
         except:
@@ -178,10 +186,7 @@ def ReceiveThread():
                         elif 'Pos' in field:
                             aux = re.split(r',|:',field)[1]
                             aux = float(aux)
-                            if unit == ' ft':
-                                Mpos = aux * 3.28084
-                            elif unit == ' m':
-                                Mpos = aux
+                            Mpos = aux
                 if not re.match(r'\<([^]]+)\>',lines):
                     logger.warning('Message without <> formating:')
                     logger.warning('\t'+lines)
