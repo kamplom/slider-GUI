@@ -402,7 +402,7 @@ def on_open(ws):
     logger.info('WS successfully connected')
 
 def on_message(ws, message):
-    logger.debug('WS message: '+ message.decode())
+    logger.debug('WS message: '+ message)
 
 def on_close(ws, close_status_code, close_msg):
     global WSConnected
