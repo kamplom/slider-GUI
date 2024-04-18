@@ -461,11 +461,11 @@ def plotArrows():
     #     red arrow
 
 ## Config params
-# ScreenWidth = 2560
-# ScreenHeight = 1600
+ScreenWidth = 2560
+ScreenHeight = 1600
 
-ScreenWidth = 1920
-ScreenHeight = 1080
+# ScreenWidth = 1920
+# ScreenHeight = 1080
 
 ## Initialize pos and lines. It is being updated from the other thread,
 ## Careful with multithread modification
