@@ -79,11 +79,11 @@ def showOffsetText(show):
 
 
 def WPosToMPos (position):
-    position = position -5177 -1054 + offset
+    position = position -5177 -1054 - offset*1000
     return position
 
 def MPosToWPos (position):
-    position = position +5177 +1054 - offset
+    position = position +5177 +1054 + offset*1000
     return position
 
 def sendStream(text):
