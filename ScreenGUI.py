@@ -417,7 +417,7 @@ def create_ws():
                                         on_message = on_message)
             wsapp.on_open = on_open
             wsapp.on_message = on_message
-            wsapp.run_forever(skip_utf8_validation=True,ping_interval=10,ping_timeout=8)
+            wsapp.run_forever(skip_utf8_validation=True,ping_interval=0,ping_timeout=8)
         except Exception as e:
             # gc.collect()
             logger.error("Websocket connection Error  : {0}".format(e))                    
