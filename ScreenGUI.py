@@ -435,6 +435,8 @@ def on_message(ws, message):
     global secAllowMovement
     global secPins
 
+    message = message.decode()
+
     listOfStates = ['Idle', 'Run', 'Hold', 'Jog', 'Alarm', 'Door', 'Check', 'Home', 'Sleep']
     for s in listOfStates:
         if s in message:
