@@ -600,7 +600,7 @@ employeeCanvas.place(x=ScreenWidth/2,y=ScreenHeight*0.4, anchor='center')
 
 # posText = canvas.create_text(ScreenWidth/2, 1080*0.65, text='4562.256', anchor='center', font=('Carlito', 225, 'bold'))
 
-posText = Text(root, borderwidth=0, highlightthickness=1, font=('Carlito', 250, 'bold'))
+posText = Text(root, borderwidth=0, highlightthickness=1, font=('Carlito', 300, 'bold'))
 posText.insert(END, "125.265")
 
 posText.place(x=ScreenWidth*0.5,y=ScreenHeight*0.68, width=ScreenWidth, height=370, anchor='center')
