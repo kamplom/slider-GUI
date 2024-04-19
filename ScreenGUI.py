@@ -12,12 +12,28 @@ import logging
 import os
 import cv2
 from dataclasses import dataclass
-
+from datetime import datetime
 import time
 
+
+
 logger = logging.getLogger(__name__)
-logging.basicConfig(filename=os.path.expanduser('~')+'/example.log', encoding='utf-8', level=logging.DEBUG)
-logging.getLogger().addHandler(logging.StreamHandler())
+logging.basicConfig(encoding='utf-8', level=logging.DEBUG)
+# logging.getLogger().addHandler(logging.StreamHandler())
+
+filename=os.path.expanduser('~')+'/example.log'
+
+current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+log_file = f"{os.path.expanduser('~')}/grblLOGS/log_{current_time}.log"
+print(log_file)
+file_handler = logging.FileHandler(log_file)
+file_handler.setLevel(logging.DEBUG)
+
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+file_handler.setFormatter(formatter)
+
+logger.addHandler(file_handler)
+
 
 @dataclass
 class Employee:
@@ -676,7 +692,7 @@ root.bind('<KeyPress-f>', lambda event: diffCallback('minus'))
 root.bind('<KeyPress-g>', lambda event: diffCallback('500'))
 root.bind('<KeyPress-h>', lambda event: diffCallback('100'))
 root.bind('<KeyPress-j>', lambda event: diffCallback('10'))
-root.bind('<KeyPress-k>', lambda event: diffCallback('1'))
+root.bind('<KeyPress-k>', lambda event: numCallback('-'))
 
 root.bind('<KeyPress-z>', lambda event: encoderCallback('-'))
 root.bind('<KeyPress-c>', lambda event: encoderCallback('+'))
