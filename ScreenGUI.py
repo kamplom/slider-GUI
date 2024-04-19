@@ -269,11 +269,11 @@ def requestJog(target, absolute):
 def jogCancel(event):
     if focusMain:
         if comPort:
-            comPort.write(b'0x85\n')
+            comPort.write(b'\x85\n')
             logger.info('Sent jog cancel')
     elif not focusMain:
         if WSConnected:
-            wsapp.send(b'0x85\n')
+            wsapp.send(b'\x85\n')
 
 def introduceOffset(event):
     global guiState
