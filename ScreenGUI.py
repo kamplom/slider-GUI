@@ -435,8 +435,8 @@ def on_message(ws, message):
     global secAllowMovement
     global secPins
 
-    # message = message.decode()
-    print(message)
+    # message = message.decode() # i need to decode in BigMig but not in raspbian
+
     listOfStates = ['Idle', 'Run', 'Hold', 'Jog', 'Alarm', 'Door', 'Check', 'Home', 'Sleep']
     for s in listOfStates:
         if s in message:
@@ -485,7 +485,8 @@ def create_ws():
             wsapp.run_forever(skip_utf8_validation=True,ping_interval=0,ping_timeout=8)
         except Exception as e:
             # gc.collect()
-            logger.error("Websocket connection Error  : {0}".format(e))                    
+            logger.error("Websocket connection Error  : {0}".format(e))  
+            WSConnected = False                  
         
         logger.error("Reconnecting websocket  after 5 sec")
         time.sleep(5)
