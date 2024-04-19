@@ -588,6 +588,7 @@ employeeList = getEmployees()
 root = Tk()
 root.geometry(str(ScreenWidth)+'x'+str(ScreenHeight))
 root.attributes("-fullscreen", True)  # substitute `Tk` for whatever your `Tk()` object is called
+root.config(cursor="none")
 
 canvas = Canvas(root, bg="white", width=ScreenWidth, height=ScreenHeight)
 canvas.place(x=0,y=0)
