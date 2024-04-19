@@ -603,7 +603,7 @@ employeeCanvas.place(x=ScreenWidth/2,y=ScreenHeight*0.4, anchor='center')
 posText = Text(root, borderwidth=0, highlightthickness=1, font=('Carlito', 300, 'bold'))
 posText.insert(END, "125.265")
 
-posText.place(x=ScreenWidth*0.5,y=ScreenHeight*0.68, width=ScreenWidth, height=370, anchor='center')
+posText.place(x=ScreenWidth*0.5,y=ScreenHeight*0.68, width=ScreenWidth, height=380, anchor='center')
 
 offsetText = Text(root, borderwidth=0, highlightthickness=1, font=('Carlito', 50, 'bold'))
 offsetText.insert(END, 'Offset: Introduce offset and press enter')
