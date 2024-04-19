@@ -250,9 +250,11 @@ def requestReset(event):
     logger.info('Sent: reset\n')
 
 def forceKill(event):
+    logger.warning('Forced killed with DTR')
     comPort.setDTR(False)
     time.sleep(0.1)
     comPort.setDTR(True)
+    
 
 def requestJogTemp(event):
     comPort.write('$J=G91 G21 X-449.000 F34800\n'.encode())
@@ -705,7 +707,7 @@ root.bind('<KeyPress-v>', clearInput)
 root.bind('<KeyPress-KP_Enter>', enterCallback)
 
 root.bind('<KeyPress-d>', lambda event: diffCallback('plus'))
-root.bind('<KeyPress-f>', lambda event: diffCallback('minus'))
+# root.bind('<KeyPress-f>', lambda event: diffCallback('minus'))
 root.bind('<KeyPress-g>', lambda event: diffCallback('500'))
 root.bind('<KeyPress-h>', lambda event: diffCallback('100'))
 root.bind('<KeyPress-j>', lambda event: diffCallback('10'))
