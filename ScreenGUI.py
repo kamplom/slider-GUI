@@ -157,12 +157,13 @@ def ReceiveThread():
                 global mainPairConnected
                 global mainHomed
                 global mainAllowMovement
+                global mainPins
                 lines = comPort.readline().decode('utf-8')
                 
                 listOfStates = ['Idle', 'Run', 'Hold', 'Jog', 'Alarm', 'Door', 'Check', 'Home', 'Sleep']
                 for s in listOfStates:
                     if s in lines:
-                        grblState = s
+                        mainGrblState = s
                 ##Checks if grbl needs a reset
 
                 if 'Reset to continue' in lines:
@@ -185,6 +186,8 @@ def ReceiveThread():
                             aux = re.split(r',|:',field)[1]
                             aux = float(aux)
                             Mpos = aux
+                        elif 'Pn' in field:
+                            mainPins = re.split(':',field)[1]
                 else:
                     logger.warning('Message without <> formating:')
                     logger.warning('\t'+lines)
@@ -286,14 +289,16 @@ def updateDebugList():
         ('mainMqttConnected', mainMqttConnected),
         ('mainPairConnected', mainPairConnected),
         ('mainHomed', mainHomed),
-        ('mainAllowMovement', mainAllowMovement)]
+        ('mainAllowMovement', mainAllowMovement),
+        ('mainPins', mainPins)]
     secDebugList = [('SEC', 'SEC'),
         ('WSConnected', WSConnected),
         ('grblState', secGrblState),
         ('mainMqttConnected', secMqttConnected),
         ('mainPairConnected', secPairConnected),
         ('mainHomed', secHomed),
-        ('mainAllowMovement', secAllowMovement)]
+        ('mainAllowMovement', secAllowMovement),
+        ('secPins', secPins)]
 
     pythonDebugList = [('PYTHON', 'PYTHON'),
         ('WSConnected', WSConnected),
@@ -427,13 +432,14 @@ def on_message(ws, message):
     global secPairConnected
     global secHomed
     global secAllowMovement
+    global secPins
 
     listOfStates = ['Idle', 'Run', 'Hold', 'Jog', 'Alarm', 'Door', 'Check', 'Home', 'Sleep']
     for s in listOfStates:
-        if s in lines:
-            grblState = s
+        if s in message:
+            secGrblState = s
 
-    if 'Reset to continue' in lines:
+    if 'Reset to continue' in message:
         secResetNeed = True
 
     if re.match(r'\<([^]]+)\>',message):
@@ -453,6 +459,8 @@ def on_message(ws, message):
                 aux = re.split(r',|:',field)[1]
                 aux = float(aux)
                 secMpos = aux
+            elif 'Pn' in field:
+                secPins = re.split(':',field)[1]
     else:
         logger.warning('Message without <> formating:')
         logger.warning('\t'+lines)
@@ -537,6 +545,7 @@ mainMqttConnected = False
 mainPairConnected = False
 mainHomed = False
 mainAllowMovement = False
+mainPins = ''
 WSConnected = False
 
 secGrblState = ''
@@ -544,6 +553,7 @@ secMqttConnected = False
 secPairConnected = False
 secHomed = False
 secAllowMovement = False
+secPins = ''
 
 updateDebugList()
 
