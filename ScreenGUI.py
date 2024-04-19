@@ -267,7 +267,12 @@ def requestJog(target, absolute):
         jogCommand = '$J=G91 G21 X'+target+' F8000'
 
 def jogCancel(event):
-    sendStream('0x85')
+     if focusMain:
+        if comPort:
+            comPort.write(b'0x85')
+    elif not focusMain:
+        if WSConnected:
+            wsapp.send(b'0x85')
 
 def introduceOffset(event):
     global guiState
