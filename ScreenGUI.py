@@ -149,10 +149,8 @@ def ReceiveThread():
             inWaiting = comPort.inWaiting()
             if inWaiting > 2:
                 global lines
-                global alarmState
                 global resetNeed
-                global grblState
-                global unit
+                global mainGrblState
 
                 global Mpos
                 global mainMqttConnected
@@ -187,7 +185,7 @@ def ReceiveThread():
                             aux = re.split(r',|:',field)[1]
                             aux = float(aux)
                             Mpos = aux
-                if not re.match(r'\<([^]]+)\>',lines):
+                else:
                     logger.warning('Message without <> formating:')
                     logger.warning('\t'+lines)
             else:
@@ -283,13 +281,27 @@ def diffCallback(input):
 
 def updateDebugList():
     global debugList
-    debugList = [('grblState', grblState),
-       ('mainMqttConnected', mainMqttConnected),
-       ('mainPairConnected', mainPairConnected),
-       ('mainHomed', mainHomed),
-       ('mainAllowMovement', mainAllowMovement),
-       ('WSConnected', WSConnected),
-       ('FocusMain', focusMain)]
+    mainDebugList = [('MAIN', 'MAIN'),
+        ('grblState', mainGrblState),
+        ('mainMqttConnected', mainMqttConnected),
+        ('mainPairConnected', mainPairConnected),
+        ('mainHomed', mainHomed),
+        ('mainAllowMovement', mainAllowMovement)]
+    secDebugList = [('SEC', 'SEC'),
+        ('WSConnected', WSConnected),
+        ('grblState', secGrblState),
+        ('mainMqttConnected', secMqttConnected),
+        ('mainPairConnected', secPairConnected),
+        ('mainHomed', secHomed),
+        ('mainAllowMovement', secAllowMovement)]
+
+    pythonDebugList = [('PYTHON', 'PYTHON'),
+        ('WSConnected', WSConnected),
+        ('FocusMain', focusMain)]
+
+    debugList = mainDebugList + secDebugList + pythonDebugList
+
+
 
 def showDebugOverlay():
     global debugTable
@@ -407,7 +419,43 @@ def on_open(ws):
     logger.info('WS successfully connected')
 
 def on_message(ws, message):
-    logger.debug('WS message: '+ message)
+    global secResetNeed
+    global secGrblState
+
+    global secMpos
+    global secMqttConnected
+    global secPairConnected
+    global secHomed
+    global secAllowMovement
+
+    listOfStates = ['Idle', 'Run', 'Hold', 'Jog', 'Alarm', 'Door', 'Check', 'Home', 'Sleep']
+    for s in listOfStates:
+        if s in lines:
+            grblState = s
+
+    if 'Reset to continue' in lines:
+        secResetNeed = True
+
+    if re.match(r'\<([^]]+)\>',message):
+        fields = message.split('<')[1]
+        fields = fields.split('>')[0]
+        fields = fields.split('|')
+        for field in fields:
+            if 'Mqtt' in field:
+                secMqttConnected = re.split(':',field)[1]
+            elif 'AlwMov' in field:
+                secAllowMovement = re.split(':',field)[1]
+            elif 'Pair' in field:
+                secPairConnected = re.split(':',field)[1]
+            elif 'Homed' in field:
+                secHomed = re.split(':',field)[1]
+            elif 'Pos' in field:
+                aux = re.split(r',|:',field)[1]
+                aux = float(aux)
+                secMpos = aux
+    else:
+        logger.warning('Message without <> formating:')
+        logger.warning('\t'+lines)
 
 def on_close(ws, close_status_code, close_msg):
     global WSConnected
@@ -473,7 +521,7 @@ Mpos = 0.0
 lines = ''
 alarmState = 0
 resetNeed = False
-grblState = ''
+mainGrblState = ''
 guiState = 'distance'
 offset = 0
 userInput = 'None'
@@ -490,6 +538,12 @@ mainPairConnected = False
 mainHomed = False
 mainAllowMovement = False
 WSConnected = False
+
+secGrblState = ''
+secMqttConnected = False
+secPairConnected = False
+secHomed = False
+secAllowMovement = False
 
 updateDebugList()
 
