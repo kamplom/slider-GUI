@@ -206,8 +206,8 @@ def ReceiveThread():
                         elif 'Pn' in field:
                             mainPins = re.split(':',field)[1]
                 else:
-                    logger.warning('Message without <> formating:')
-                    logger.warning('\t'+lines)
+                    logger.info('Message without <> formating:')
+                    logger.info('\t'+lines)
             else:
                 time.sleep(0.01)
         except:
@@ -265,6 +265,9 @@ def requestJog(target, absolute):
         sendStream(jogCommand)
     else:
         jogCommand = '$J=G91 G21 X'+target+' F8000'
+
+def jogCancel(event):
+    sendStream('0x85')
 
 def introduceOffset(event):
     global guiState
@@ -672,6 +675,8 @@ root.bind('<KeyPress-a>', introduceOffset)
 root.bind('<KeyPress-s>', unitSwitch)
 root.bind('<KeyPress-x>', focusSwitch)
 root.bind('<KeyRelease-x>', releaseX)
+root.bind('<KeyPress-q>', jogCancel)
+
 
 root.bind('<KeyPress-1>', lambda event: numCallback('1'))
 root.bind('<KeyPress-2>', lambda event: numCallback('2'))
@@ -696,6 +701,7 @@ root.bind('<KeyPress-k>', lambda event: numCallback('-'))
 
 root.bind('<KeyPress-z>', lambda event: encoderCallback('-'))
 root.bind('<KeyPress-c>', lambda event: encoderCallback('+'))
+
 
 
 root.update()
