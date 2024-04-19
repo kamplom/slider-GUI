@@ -248,7 +248,12 @@ def requestReset(event):
     global resetNeed
     comPort.write(b'\x18')
     logger.info('Sent: reset\n')
-    
+
+def forceKill(event):
+    comPort.setDTR(False)
+    time.sleep(0.1)
+    comPort.setDTR(True)
+
 def requestJogTemp(event):
     comPort.write('$J=G91 G21 X-449.000 F34800\n'.encode())
     logger.info('Sent: request jog\n')
@@ -682,6 +687,7 @@ root.bind('<KeyPress-s>', unitSwitch)
 root.bind('<KeyPress-x>', focusSwitch)
 root.bind('<KeyRelease-x>', releaseX)
 root.bind('<KeyPress-q>', jogCancel)
+root.bind('<KeyPress-f>', forceKill)
 
 
 root.bind('<KeyPress-1>', lambda event: numCallback('1'))
