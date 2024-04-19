@@ -170,8 +170,8 @@ def ReceiveThread():
                     resetNeed = True
 
                 if re.match(r'\<([^]]+)\>',lines):
-                    if 'Pn' not in lines:
-                        mainPins = None
+                    if not 'Pn' in lines:
+                        mainPins = 'None'
                     fields = lines.split('<')[1]
                     fields = fields.split('>')[0]
                     fields = fields.split('|')
