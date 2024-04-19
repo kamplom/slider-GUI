@@ -444,6 +444,7 @@ def on_message(ws, message):
         secResetNeed = True
 
     if re.match(r'\<([^]]+)\>',message):
+        mainPins = 'None'
         fields = message.split('<')[1]
         fields = fields.split('>')[0]
         fields = fields.split('|')
