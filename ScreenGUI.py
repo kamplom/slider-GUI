@@ -77,86 +77,38 @@ class Timer:
         self._start_time = None
         return elapsed_time
 
+@dataclass
+class GrblState:
+    state: str = ''
+    mPos: float = 0
+    mainMqttConnected: bool = False 
+    mainPairConnected: bool = False
+    mainHomed: bool = False
+    mainAllowMovement: bool = False
+    mainPins: str = ''
+    
 
 
-def updatePosText(text):
-    text = text + unit
-    posText.delete('1.0', END)
-    posText.insert(END, text)
-    posText.tag_add("center", "1.0", "end")
-    posText.tag_configure("center", justify='center')
-
-def showOffsetText(show):
-    if show:
-        offsetText.place(x=ScreenWidth*0.5,y=ScreenHeight*0.52, width=ScreenWidth, height=115, anchor='center')
-    else:
-        offsetText.place_forget()
-
-
-
-def WPosToMPos (position):
-    position = position -5177 -1054 - offset*1000
-    return position
-
-def MPosToWPos (position):
-    position = position +5177 +1054 + offset*1000
-    return position
-
-def sendStream(text):
-    global focusMain
-    global wsapp
-    logger.info(f'FocusMain: {focusMain}: Sent: {text}')
-    if focusMain:
-        if comPort:
-            comPort.write(text.encode())
-    elif not focusMain:
-        if WSConnected:
-            wsapp.send(text.encode())
-
-def unitCorrection(pos):
-    if unit == ' ft':
-        pos = pos * 3.28084
-    else:
-        pos = pos
-    return pos
-
-def plotPos():
-    global displayProd
-    global displayProy
-    global unit
-    if guiState == 'distance':
-        showOffsetText(False)
-        try:
-            aux = unitCorrection(abs(MPosToWPos(Mpos)))
-            displayPos = '{:.3f}'.format((aux)/1000)
-            updatePosText(displayPos)
-            # canvas.itemconfig(posText, text=displayPos+' m')
-        except:
-            logger.error('Tried to plot a Pos that is not a Float')
-    elif guiState == 'target':
-        showOffsetText(False)
-        updatePosText(userInput)
-    elif guiState == 'offset':
-        showOffsetText(True)
-        if not userInput == 'None':
-            updatePosText(userInput)
-    root.after(50, plotPos)
-
+# Serial/Websocket I/O related funcs
 def askSerial():
-    if comPort:
-        try:
-            comPort.write('?'.encode())
-        except:
-            logger.warning("Could not wirte ?")
-    root.after(100,askSerial)
-
+    while True:
+        if comPort:
+            try:
+                comPort.write('?'.encode())
+                time.sleep(0.1)
+            except:
+                logger.warning("Could not wirte ?")
+                time.sleep(1)
 def askWebSocket():
-    if WSConnected:
-        try:
-            wsapp.send("?\n".encode())
-        except:
-            logger.warning("WS: Could not send ?")
-    root.after(1000,askWebSocket)
+    while True:
+        if WSConnected:
+            try:
+                wsapp.send("?\n".encode())
+                time.sleep(0.5)
+            except:
+                logger.warning("WS: Could not send ?")
+                time.sleep(2)
+
 
 def ReceiveThread():
     global wsapp
@@ -215,81 +167,7 @@ def ReceiveThread():
             connectSerial()
             break
 
-
-def releaseX(event):
-    global xTimer
-    global debugOverlay
-    stopTime = xTimer.stop()
-    logger.debug(f'Stop time: {stopTime:.4f}')
-    if stopTime > 0.395:
-        if debugOverlay == False:
-            debugOverlay = True
-            showDebugOverlay()
-        else:
-            debugOverlay = False
-
-
-def requestHoming(event):
-    global wsapp
-    if WSConnected:
-        wsapp.send("?\n".encode())
-    # comPort.write('$H\n'.encode())
-    sendStream('$HX\n')
-    i = 0
-    while (not alarmState) and  ('ok' not in lines) and i < 1000:
-        time.sleep(0.01)
-        i = i + 1
-    if i == 1000:
-        return 0
-    else:
-        return 1
-    
-def requestReset(event):
-    global resetNeed
-    comPort.write(b'\x18')
-    logger.info('Sent: reset\n')
-
-def forceKill(event):
-    logger.warning('Forced killed with DTR')
-    comPort.setDTR(False)
-    time.sleep(0.1)
-    comPort.setDTR(True)
-    
-
-def requestJogTemp(event):
-    comPort.write('$J=G91 G21 X-449.000 F34800\n'.encode())
-    logger.info('Sent: request jog\n')
-
-def requestJog(target, absolute):
-    if unit == ' ft':
-        target = float(target)
-        target = target / 3.28084
-        target = '{:.4f}'.format((abs(target)))
-    if absolute:
-        target = (float(target))*1000
-        target = WPosToMPos(target)
-        jogCommand = '$J=G90 G21 X'+'{:.3f}'.format(target)+ ' F34800\n'
-        sendStream(jogCommand)
-    else:
-        jogCommand = '$J=G91 G21 X'+target+' F8000'
-
-def jogCancel(event):
-    if focusMain:
-        if comPort:
-            comPort.write(b'\x85\n')
-            logger.info('Sent jog cancel')
-    elif not focusMain:
-        if WSConnected:
-            wsapp.send(b'\x85\n')
-
-def introduceOffset(event):
-    global guiState
-    global userInput
-    if guiState == 'distance' or guiState == 'target':
-        guiState = 'offset'
-    elif guiState == 'offset':
-        guiState = 'distance'
-    userInput = 'None'
+# Keyboard callbacks
 
 def numCallback(num):
     global userInput
@@ -313,6 +191,210 @@ def diffCallback(input):
         jogCommand = '$J=G91 G21 X'+sign+input+' F34800\n'
         sendStream(jogCommand)
         sign = None
+
+def encoderCallback(input):
+    jogCommand = '$J=G91 G21 X'+input+'10 F34800\n'
+    sendStream(jogCommand)
+
+def enterCallback(event):
+    global guiState
+    global userInput
+    global offset
+    if userInput == 'None':
+        clearInput(event)
+    if guiState == 'target':
+        if not userInput == 'None':
+            requestJog(userInput, True)
+            userInput = 'None'
+            guiState = 'distance'
+    elif guiState == 'offset':
+        if not userInput == 'None':
+            offset = float(userInput)
+            userInput = 'None'
+            guiState = 'distance'
+
+def clearInput(event):
+    global guiState
+    global userInput
+    logger.debug('Flushed user input')
+    guiState = 'distance'
+    userInput = 'None'
+
+def forceKill(event):
+    logger.warning('Forced killed with DTR')
+    comPort.setDTR(False)
+    time.sleep(0.1)
+    comPort.setDTR(True)
+
+def jogCancel(event):
+    if focusMain:
+        if comPort:
+            comPort.write(b'\x85\n')
+            logger.info('Sent jog cancel')
+    elif not focusMain:
+        if WSConnected:
+            wsapp.send(b'\x85\n')
+
+def releaseX(event):
+    global xTimer
+    global debugOverlay
+    stopTime = xTimer.stop()
+    logger.debug(f'Stop time: {stopTime:.4f}')
+    if stopTime > 0.395:
+        if debugOverlay == False:
+            debugOverlay = True
+            showDebugOverlay()
+        else:
+            debugOverlay = False
+
+def focusSwitch(event):
+    global focusMain
+    global xTimer
+    xTimer.start()
+    if focusMain:
+        focusMain = False
+    elif not focusMain:
+        focusMain = True
+    else:
+        focusMain = True
+
+
+
+
+def updatePosText(text):
+    text = text + unit
+    posText.delete('1.0', END)
+    posText.insert(END, text)
+    posText.tag_add("center", "1.0", "end")
+    posText.tag_configure("center", justify='center')
+
+def showOffsetText(show):
+    if show:
+        offsetText.place(x=ScreenWidth*0.5,y=ScreenHeight*0.52, width=ScreenWidth, height=115, anchor='center')
+    else:
+        offsetText.place_forget()
+
+def WPosToMPos (position):
+    position = position -5177 -1054 - offset*1000
+    return position
+
+def MPosToWPos (position):
+    position = position +5177 +1054 + offset*1000
+    return position
+
+def sendStream(text):
+    global focusMain
+    global wsapp
+    logger.info(f'FocusMain: {focusMain}: Sent: {text}')
+    if focusMain:
+        if comPort:
+            comPort.write(text.encode())
+    elif not focusMain:
+        if WSConnected:
+            wsapp.send(text.encode())
+
+def unitCorrection(pos):
+    if unit == ' ft':
+        pos = pos * 3.28084
+    else:
+        pos = pos
+    return pos
+
+
+## Plot pos will only update the contents depending on the guiState. Changing the guiLayout will be handeled by a separate funciton, triggered by a guiState change.
+## Since .after is blocking it should not be able to change the guistate in the middle of plotPos execution
+def plotPos():
+    if guiState == 'distance':
+        showOffsetText(False)
+        try:
+            aux = unitCorrection(abs(MPosToWPos(Mpos)))
+            displayPos = '{:.3f}'.format((aux)/1000)
+            updatePosText(displayPos)
+            # canvas.itemconfig(posText, text=displayPos+' m')
+        except:
+            logger.error('Tried to plot a Pos that is not a Float')
+    elif guiState == 'target':
+        showOffsetText(False)
+        updatePosText(userInput)
+    elif guiState == 'offset':
+        showOffsetText(True)
+        if not userInput == 'None':
+            updatePosText(userInput)
+    root.after(50, plotPos)
+
+def setGuiState(state):
+    global guiState
+    guiState = state
+    if state == 'distance':
+        showOffsetText(False)
+    elif guiState == 'target':
+        showOffsetText(False)
+    elif guiState == 'offset':
+        showOffsetText(True)
+    else:
+        showOffsetText(True)
+        guiState = 'distance'
+
+
+def requestHoming(event):
+    sendStream('$HX\n')
+    return 1
+    # while (not alarmState) and  ('ok' not in lines) and i < 1000:
+    #     time.sleep(0.01)
+    #     i = i + 1
+    # if i == 1000:
+    #     return 0
+    # else:
+    #     return 1
+    
+def requestReset(event):
+    global resetNeed
+    comPort.write(b'\x18')
+    logger.info('Sent: reset\n')
+
+def unitSwitch(event):
+    global unit
+    global offset
+    if unit == ' m':
+        unit = ' ft'
+        # offset = offset * 3.28084
+    else:
+        unit = ' m'
+        # offset = offset / 3.28084
+
+def introduceOffset(event):
+    global guiState
+    global userInput
+    if guiState == 'distance' or guiState == 'target':
+        guiState = 'offset'
+    elif guiState == 'offset':
+        guiState = 'distance'
+    userInput = 'None'
+
+
+
+
+
+def requestJog(target, absolute):
+    if unit == ' ft':
+        target = float(target)
+        target = target / 3.28084
+        target = '{:.4f}'.format((abs(target)))
+    if absolute:
+        target = (float(target))*1000
+        target = WPosToMPos(target)
+        jogCommand = '$J=G90 G21 X'+'{:.3f}'.format(target)+ ' F34800\n'
+        sendStream(jogCommand)
+    else:
+        jogCommand = '$J=G91 G21 X'+target+' F8000'
+
+
+
+
+
+
+
+
 
 
 def updateDebugList():
@@ -355,26 +437,9 @@ def showDebugOverlay():
         debugTable.remove(root)
         logger.info('Quiting debug overlay')
 
-def encoderCallback(input):
-    jogCommand = '$J=G91 G21 X'+input+'10 F34800\n'
-    sendStream(jogCommand)
 
-def enterCallback(event):
-    global guiState
-    global userInput
-    global offset
-    if userInput == 'None':
-        clearInput(event)
-    if guiState == 'target':
-        if not userInput == 'None':
-            requestJog(userInput, True)
-            userInput = 'None'
-            guiState = 'distance'
-    elif guiState == 'offset':
-        if not userInput == 'None':
-            offset = float(userInput)
-            userInput = 'None'
-            guiState = 'distance'
+
+
 
 def updateuserInput(num):
     global userInput
@@ -386,12 +451,6 @@ def updateuserInput(num):
     logger.debug('Tried to append number: ' + num)
     logger.debug('New user input: ' + userInput)
 
-def clearInput(event):
-    global guiState
-    global userInput
-    logger.debug('Flushed user input')
-    guiState = 'distance'
-    userInput = 'None'
 
 def onMqttMessage(client, userdata, msg):
     global prod
@@ -449,7 +508,7 @@ def connectSerial():
 reply_timeout = 10
 ping_timeout = 5
 sleep_time = 5
-url = 'ws://192.168.0.31:80'
+url = 'ws://192.168.1.92:80'
 
 def on_open(ws):
     global WSConnected
@@ -457,49 +516,50 @@ def on_open(ws):
     logger.info('WS successfully connected')
 
 def on_message(ws, message):
-    global secResetNeed
-    global secGrblState
+    hole = 1
+    # global secResetNeed
+    # global secGrblState
 
-    global secMpos
-    global secMqttConnected
-    global secPairConnected
-    global secHomed
-    global secAllowMovement
-    global secPins
+    # global secMpos
+    # global secMqttConnected
+    # global secPairConnected
+    # global secHomed
+    # global secAllowMovement
+    # global secPins
 
-    # message = message.decode() # i need to decode in BigMig but not in raspbian
+    # # message = message.decode() # i need to decode in BigMig but not in raspbian
 
-    listOfStates = ['Idle', 'Run', 'Hold', 'Jog', 'Alarm', 'Door', 'Check', 'Home', 'Sleep']
-    for s in listOfStates:
-        if s in message:
-            secGrblState = s
+    # listOfStates = ['Idle', 'Run', 'Hold', 'Jog', 'Alarm', 'Door', 'Check', 'Home', 'Sleep']
+    # for s in listOfStates:
+    #     if s in message:
+    #         secGrblState = s
 
-    if 'Reset to continue' in message:
-        secResetNeed = True
+    # if 'Reset to continue' in message:
+    #     secResetNeed = True
 
-    if re.match(r'\<([^]]+)\>',message):
-        secPins = 'None'
-        fields = message.split('<')[1]
-        fields = fields.split('>')[0]
-        fields = fields.split('|')
-        for field in fields:
-            if 'Mqtt' in field:
-                secMqttConnected = re.split(':',field)[1]
-            elif 'AlwMov' in field:
-                secAllowMovement = re.split(':',field)[1]
-            elif 'Pair' in field:
-                secPairConnected = re.split(':',field)[1]
-            elif 'Homed' in field:
-                secHomed = re.split(':',field)[1]
-            elif 'Pos' in field:
-                aux = re.split(r',|:',field)[1]
-                aux = float(aux)
-                secMpos = aux
-            elif 'Pn' in field:
-                secPins = re.split(':',field)[1]
-    else:
-        logger.warning('Message without <> formating:')
-        logger.warning('\t'+lines)
+    # if re.match(r'\<([^]]+)\>',message):
+    #     secPins = 'None'
+    #     fields = message.split('<')[1]
+    #     fields = fields.split('>')[0]
+    #     fields = fields.split('|')
+    #     for field in fields:
+    #         if 'Mqtt' in field:
+    #             secMqttConnected = re.split(':',field)[1]
+    #         elif 'AlwMov' in field:
+    #             secAllowMovement = re.split(':',field)[1]
+    #         elif 'Pair' in field:
+    #             secPairConnected = re.split(':',field)[1]
+    #         elif 'Homed' in field:
+    #             secHomed = re.split(':',field)[1]
+    #         elif 'Pos' in field:
+    #             aux = re.split(r',|:',field)[1]
+    #             aux = float(aux)
+    #             secMpos = aux
+    #         elif 'Pn' in field:
+    #             secPins = re.split(':',field)[1]
+    # else:
+    #     logger.warning('Message without <> formating:')
+    #     logger.warning('\t'+lines)
 
 def on_close(ws, close_status_code, close_msg):
     global WSConnected
@@ -515,36 +575,19 @@ def create_ws():
                                         on_message = on_message)
             wsapp.on_open = on_open
             wsapp.on_message = on_message
-            wsapp.run_forever(skip_utf8_validation=True,ping_interval=0,ping_timeout=10)
+            wsapp.run_forever(skip_utf8_validation=True,ping_interval=3,ping_timeout=2)
         except Exception as e:
             # gc.collect()
-            logger.error("Websocket connection Error  : {0}".format(e))  
+            logger.error("Websocket connection Error")  
             WSConnected = False                  
         
         logger.error("Reconnecting websocket  after 5 sec")
         WSConnected = False
         time.sleep(5)
 
-def unitSwitch(event):
-    global unit
-    global offset
-    if unit == ' m':
-        unit = ' ft'
-        # offset = offset * 3.28084
-    else:
-        unit = ' m'
-        # offset = offset / 3.28084
 
-def focusSwitch(event):
-    global focusMain
-    global xTimer
-    xTimer.start()
-    if focusMain:
-        focusMain = False
-    elif not focusMain:
-        focusMain = True
-    else:
-        focusMain = True
+
+
 
 def plotArrows():
     logger.debug('Plot arrows')
@@ -558,9 +601,18 @@ def plotArrows():
 ## Config params
 ScreenWidth = 2560
 ScreenHeight = 1600
-
 # ScreenWidth = 1920
 # ScreenHeight = 1080
+
+# MQTT settings
+broker = 'broker.emqx.io'
+port= 1883
+topic = "zigzag/mqtt"
+client_id = f'zigzagslider1'
+prod = ''
+proy = ''
+displayProd = ''
+displayProy = ''
 
 ## Initialize pos and lines. It is being updated from the other thread,
 ## Careful with multithread modification
@@ -568,6 +620,8 @@ Mpos = 0.0
 lines = ''
 alarmState = 0
 resetNeed = False
+
+
 mainGrblState = ''
 guiState = 'distance'
 offset = 0
@@ -600,16 +654,6 @@ debugList_rows = len(debugList)
 debugList_columns = len(debugList[0])
 
 
-
-#MQTT settings
-broker = 'broker.emqx.io'
-port= 1883
-topic = "zigzag/mqtt"
-client_id = f'zigzagslider1'
-prod = ''
-proy = ''
-displayProd = ''
-displayProy = ''
 
 
 mqttClient = pahoMqtt.Client(client_id)
@@ -646,27 +690,6 @@ offsetText.insert(END, 'Offset: Introduce offset and press enter')
 offsetText.tag_add("center", "1.0", "end")
 offsetText.tag_configure("center", justify='center')
 
-
-# prodProyText = canvas.create_text(ScreenWidth/2, ScreenHeight*0.20, text='GARAGE - "Lambo"', anchor='center', font=('Carlito', 120, 'bold'))
-
-
-# posLabel = Label(root, text='', font=('Carlito', 225, 'bold'), bg="#f6a0a0")
-# posLabel.place(relx=0.5, rely=0.3, anchor='center')
-
-# stateLabel = Label(root, text='', font=('Carlito', 80), fg='#5b5b5b')
-# stateLabel.place(relx=0.15, rely=0.3, anchor='center')
-
-# unitLabel = Label(root, text='m', font=('Carlito', 80), fg='#5b5b5b')
-# unitLabel.place(relx=0.85, rely=0.3, anchor='center')
-
-# productoraLabel = Label(root, text='PRODUCTORA', font=('Carlito', 75))
-# productoraLabel.place(relx=0.5, rely=0.70, anchor='center')
-
-# proyectoLabel = Label(root, text='PROYECTO', font=('Carlito', 75))
-# proyectoLabel.place(relx=0.5, rely=0.85, anchor='center')
-
-# guiStateLabel = Label(root, text='offset', font=('Carlito', 75), fg='red')
-
 zigzagImg = Image.open('./zigzag.png')
 zigzagImg = zigzagImg.resize((250, 250))
 zigzagImg = ImageTk.PhotoImage(zigzagImg)
@@ -675,24 +698,20 @@ zigzagLogo = Label(root, image = zigzagImg)
 
 zigzagLogo.place(relx=0.5, rely=0.2, anchor='c')
 
+# Spawining threads for I/O operations
 threading.Thread(target=connectSerial).start()
-
 threading.Thread(target=create_ws).start()
+threading.Thread(target=askSerial).start()
+threading.Thread(target=askWebSocket).start()
 
-plotPos()
-askWebSocket()
-askSerial()
-
+# Tkinter bindings
 root.bind('<KeyPress-r>',requestHoming)
-# root.bind('<KeyPress-r>', requestReset) 
-# root.bind('<KeyPress-j>', requestJogTemp)
 root.bind('<KeyPress-a>', introduceOffset)
 root.bind('<KeyPress-s>', unitSwitch)
 root.bind('<KeyPress-x>', focusSwitch)
 root.bind('<KeyRelease-x>', releaseX)
 root.bind('<KeyPress-q>', jogCancel)
 root.bind('<KeyPress-f>', forceKill)
-
 
 root.bind('<KeyPress-1>', lambda event: numCallback('1'))
 root.bind('<KeyPress-2>', lambda event: numCallback('2'))
@@ -718,8 +737,9 @@ root.bind('<KeyPress-k>', lambda event: numCallback('-'))
 root.bind('<KeyPress-z>', lambda event: encoderCallback('-'))
 root.bind('<KeyPress-c>', lambda event: encoderCallback('+'))
 
+# Call main tkinter function
+plotPos()
 
-
+# Enter tkinter mainloop
 root.update()
-
 root.mainloop()
